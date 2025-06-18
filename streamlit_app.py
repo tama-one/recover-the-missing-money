@@ -98,4 +98,4 @@ if st.session_state.score >= 5000:
     st.stop()
 
 st.markdown("---")
-st.markdown("※ 顔画像を叩くUIはHTMLとJSで今後改良予定")
+st.markdown("※とにかくしばこう")
