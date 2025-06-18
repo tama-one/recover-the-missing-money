@@ -35,6 +35,13 @@ if "play_charin" not in st.session_state:
     st.session_state.play_charin = False
 
 # --------------------------------------
+# 🔊 チャリーン音を鳴らす処理（フラグが立ってる時だけ）
+# --------------------------------------
+if st.session_state.play_charin:
+    st.markdown(load_audio("ojisan_game_assets/charin.mp3"), unsafe_allow_html=True)
+    st.session_state.play_charin = False
+
+# --------------------------------------
 # ボタンでスコア加算＆チャリーン音
 # --------------------------------------
 if st.button("👉 まむこをしばく！"):
@@ -43,13 +50,6 @@ if st.button("👉 まむこをしばく！"):
     st.session_state.ojisan_y = random.randint(100, 300)
     st.session_state.play_charin = True
     st.rerun()
-
-# --------------------------------------
-# 🔊 チャリーン音を鳴らす処理（フラグが立ってる時だけ）
-# --------------------------------------
-if st.session_state.play_charin:
-    st.markdown(load_audio("ojisan_game_assets/charin.mp3"), unsafe_allow_html=True)
-    st.session_state.play_charin = False
 
 # --------------------------------------
 # 💰 現在のスコア表示
