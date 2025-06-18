@@ -64,7 +64,14 @@ if st.session_state.score >= 5000:
     st.success("🎉 クリア！まむこから5,000円を回収した！")
     st.markdown(load_audio("ojisan_game_assets/fanfare.mp3"), unsafe_allow_html=True)
     st.balloons()
+
+    # ▶️ もう一度プレイボタン
+    if st.button("🔁 もう一度まむこをしばく！"):
+        st.session_state.score = 0
+        st.session_state.ojisan_x = random.randint(50, 350)
+        st.session_state.ojisan_y = random.randint(100, 300)
+        st.experimental_rerun()
     st.stop()
 
+
 st.markdown("---")
-st.caption("※ 顔画像を叩くUIは HTML と JS で今後改良予定")
