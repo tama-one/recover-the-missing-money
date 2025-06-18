@@ -1,19 +1,11 @@
-
 import streamlit as st
 import random
 import time
 import base64
 
-# ページ設定
-st.set_page_config(page_title="まむこから取り戻せ", layout="centered")
-st.title("まむこから取り戻せ ")
-
-# 👇チャリーン音を鳴らすためのフラグ確認（ページの一番上に追加！）
-if "play_charin" in st.session_state and st.session_state.play_charin:
-    st.markdown(load_audio("ojisan_game_assets/charin.mp3"), unsafe_allow_html=True)
-    st.session_state.play_charin = False
-
-# 音声ファイルの埋め込み
+# --------------------------------------
+# 音声ファイルの埋め込み関数（先に定義）
+# --------------------------------------
 def load_audio(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -24,18 +16,32 @@ def load_audio(file_path):
         </audio>
         """
 
+# --------------------------------------
+# ページ設定とタイトル
+# --------------------------------------
+st.set_page_config(page_title="まむこから取り戻せ", layout="centered")
+st.title("まむこから取り戻せ")
+
+# --------------------------------------
 # セッション変数の初期化
+# --------------------------------------
 if "score" not in st.session_state:
     st.session_state.score = 0
 if "ojisan_x" not in st.session_state:
     st.session_state.ojisan_x = random.randint(50, 350)
 if "ojisan_y" not in st.session_state:
     st.session_state.ojisan_y = random.randint(100, 300)
+if "play_charin" not in st.session_state:
+    st.session_state.play_charin = False
 
-# スコア表示
+# --------------------------------------
+# 💰 現在のスコア表示
+# --------------------------------------
 st.markdown(f"### 💰 現在の回収額：{st.session_state.score} 円")
 
-# 顔画像の表示位置（CSSで動かす）
+# --------------------------------------
+# 顔画像の表示（HTML+CSSでランダム位置に配置）
+# --------------------------------------
 st.markdown(
     f"""
     <style>
@@ -57,27 +63,39 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# クリック検知
-if st.button("まむこをしばく！"):
+# --------------------------------------
+# ボタンでスコア加算＆チャリーン音
+# --------------------------------------
+if st.button("👉 まむこをしばく！"):
     st.session_state.score += 500
     st.session_state.ojisan_x = random.randint(50, 350)
     st.session_state.ojisan_y = random.randint(100, 300)
     st.session_state.play_charin = True
     st.rerun()
 
-# クリア判定
+# --------------------------------------
+# 🔊 チャリーン音を鳴らす処理（フラグが立ってる時だけ）
+# --------------------------------------
+if st.session_state.play_charin:
+    st.markdown(load_audio("ojisan_game_assets/charin.mp3"), unsafe_allow_html=True)
+    st.session_state.play_charin = False
+
+# --------------------------------------
+# 🎉 クリア判定 ＋ ファンファーレ
+# --------------------------------------
 if st.session_state.score >= 5000:
     st.success("🎉 クリア！まむこから5,000円を回収した！")
     st.markdown(load_audio("ojisan_game_assets/fanfare.mp3"), unsafe_allow_html=True)
     st.balloons()
 
-    # ▶️ もう一度プレイボタン
+    # ▶️ もう一度しばくボタン
     if st.button("🔁 もう一度まむこをしばく！"):
         st.session_state.score = 0
         st.session_state.ojisan_x = random.randint(50, 350)
         st.session_state.ojisan_y = random.randint(100, 300)
         st.rerun()
+
     st.stop()
 
-
 st.markdown("---")
+st.markdown("※ 顔画像を叩くUIはHTMLとJSで今後改良予定")
