@@ -39,25 +39,19 @@ if "play_charin" not in st.session_state:
 # --------------------------------------
 st.markdown(f"### 💰 現在の回収額：{st.session_state.score} 円")
 
-# --------------------------------------
-# 顔画像の表示（HTML+CSSでランダム位置に配置）
-# --------------------------------------
+# 顔画像の表示位置（POSTしないただの画像に修正）
 st.markdown(
     f"""
     <style>
-    .ojisan-button {{
+    .ojisan-image {{
         position: absolute;
         top: {st.session_state.ojisan_y}px;
         left: {st.session_state.ojisan_x}px;
         z-index: 10;
     }}
     </style>
-    <div class="ojisan-button">
-        <form action="" method="post">
-            <button name="tap" style="background: none; border: none;">
-                <img src="https://github.com/tama-one/recover-the-missing-money/blob/main/ojisan_game_assets/ojisan.png?raw=true" width="100">
-            </button>
-        </form>
+    <div class="ojisan-image">
+        <img src="https://github.com/tama-one/recover-the-missing-money/blob/main/ojisan_game_assets/ojisan.png?raw=true" width="100">
     </div>
     """,
     unsafe_allow_html=True
