@@ -8,6 +8,11 @@ import base64
 st.set_page_config(page_title="まむこから取り戻せ", layout="centered")
 st.title("まむこから取り戻せ ")
 
+# 👇チャリーン音を鳴らすためのフラグ確認（ページの一番上に追加！）
+if "play_charin" in st.session_state and st.session_state.play_charin:
+    st.markdown(load_audio("ojisan_game_assets/charin.mp3"), unsafe_allow_html=True)
+    st.session_state.play_charin = False
+
 # 音声ファイルの埋め込み
 def load_audio(file_path):
     with open(file_path, "rb") as f:
@@ -53,11 +58,12 @@ st.markdown(
 )
 
 # クリック検知
-if st.button("👈 まむこをしばく！"):
+if st.button("まむこをしばく！"):
     st.session_state.score += 500
     st.session_state.ojisan_x = random.randint(50, 350)
     st.session_state.ojisan_y = random.randint(100, 300)
-    st.markdown(load_audio("ojisan_game_assets/charin.mp3"), unsafe_allow_html=True)
+    st.session_state.play_charin = True
+    st.rerun()
 
 # クリア判定
 if st.session_state.score >= 5000:
