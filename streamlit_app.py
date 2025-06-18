@@ -5,8 +5,8 @@ import time
 import base64
 
 # ページ設定
-st.set_page_config(page_title="おじさんチャリーンゲーム", layout="centered")
-st.title("🧓まむこから取り戻せ💰 ")
+st.set_page_config(page_title="まむこから取り戻せ", layout="centered")
+st.title("まむこから取り戻せ ")
 
 # 音声ファイルの埋め込み
 def load_audio(file_path):
