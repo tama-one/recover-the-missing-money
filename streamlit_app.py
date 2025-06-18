@@ -44,7 +44,7 @@ st.markdown(
     <div class="ojisan-button">
         <form action="" method="post">
             <button name="tap" style="background: none; border: none;">
-                <img src="ojisan_game_assets/ojisan.png" width="100">
+               <img src="https://github.com/tama-one/recover-the-missing-money/blob/main/ojisan_game_assets/ojisan.png?raw=true" width="100">
             </button>
         </form>
     </div>
