@@ -70,7 +70,7 @@ if st.session_state.score >= 5000:
         st.session_state.score = 0
         st.session_state.ojisan_x = random.randint(50, 350)
         st.session_state.ojisan_y = random.randint(100, 300)
-        st.experimental_rerun()
+        st.rerun()
     st.stop()
 
 
